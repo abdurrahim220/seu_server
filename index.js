@@ -29,8 +29,13 @@ async function run() {
     await client.connect();
 
 
-    const usersMembersCollection = client.db('SEU').collection('members')
-    const usersGalleryCollection = client.db('SEU').collection('gallery')
+    const usersMembersCollection = client.db('SEU').collection('members');
+
+    const usersGalleryCollection = client.db('SEU').collection('gallery');
+
+    const usersDataCollection = client.db('SEU').collection('data');
+
+    const usersEventsCollection = client.db('SEU').collection('events');
 
 
     app.get('/members', async (req, res) => {
@@ -42,6 +47,20 @@ async function run() {
     app.get('/gallery', async (req, res) => {
         
         const result = await usersGalleryCollection.find().toArray();
+        res.send(result)
+    });
+
+
+    app.get('/data', async (req, res) => {
+        
+        const result = await usersDataCollection.find().toArray();
+        res.send(result)
+    });
+
+
+    app.get('/events', async (req, res) => {
+        
+        const result = await usersEventsCollection.find().toArray();
         res.send(result)
     });
 
